@@ -1,0 +1,22 @@
+public class DB {
+
+    private static Connection c;
+
+    private static void createNewConnection() throws Exception {
+        String url = "jdbc:ucanaccess://D:/datasource.mdb";
+        c = DriverManager.getConnection(url);
+    }
+    public static void putData(String sql) throws Exception {
+        if (c == null) {
+            createNewConnection();
+        }
+        c.createStatement().executeUpdate(sql);
+    }
+
+    public static ResultSet serch(String sql) throws Exception {
+        if (c == null) {
+            createNewConnection();
+        }
+        return c.createStatement().executeQuery(sql);
+    } 
+}
